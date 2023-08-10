@@ -19,6 +19,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/', [ExpenseController::class, 'index'])->name('expenses.index');
     Route::post('/expenses', [ExpenseController::class, 'store'])->name('expenses.store');
     Route::get('/expenses', [ExpenseController::class, 'list'])->name('expenses.list');
+    Route::get('/expenses/balance', [ExpenseController::class, 'balance'])->name('expenses.balance');
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 });
