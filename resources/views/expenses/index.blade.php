@@ -25,35 +25,25 @@
                     <button type="submit" class="btn btn-primary">Add Expense</button>
                 </div>
             </form>
+            @if(count($expenses) > 0)
+                <div class="text-center mt-5">
+                    <a href="{{ route('expenses.list') }}" class="btn btn-primary">List</a>
+                </div>
+            @endif
         </div>
     </div>
 
 
-    <div id="success-message" class="alert alert-success d-none">
-        {{ session('success') }}
-    </div>
 
 
 
-    <!-- Tabla que muestra la lista de gastos -->
-    <table>
-        <thead>
-            <tr>
-                <th>Description</th>
-                <th>Amount</th>
-                <th>Date</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($expenses as $expense)
-            <tr>
-                <td>{{ $expense->description }}</td>
-                <td>{{ $expense->amount }}</td>
-                <td>{{ $expense->date }}</td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
+    @if(session()->has('success') && session('success'))
+        <div id="success-message" class="alert alert-success d-none">
+            {{ session('success') }}
+        </div>
+    @endif
+
+
 </body>
     <script>
         // Mostrar el mensaje de éxito si existe en la sesión

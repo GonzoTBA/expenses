@@ -29,8 +29,10 @@ class ExpenseController extends Controller
         return redirect()->route('expenses.index')->with('success', 'Expense saved successfully.');
     }
 
-    public function create()
+    public function list() 
     {
-        return view('expenses.create');
+        $expenses = Expense::all();
+
+        return view('expenses.list', compact('expenses'));
     }
 }
