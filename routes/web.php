@@ -14,12 +14,13 @@ use App\Http\Controllers\ExpenseController;
 |
 */
 
+Route::middleware(['auth'])->group(function () {
+    // These routes are protected
+    Route::get('/', [ExpenseController::class, 'index'])->name('expenses.index');
+    Route::post('/expenses', [ExpenseController::class, 'store'])->name('expenses.store');
+    Route::get('/expenses', [ExpenseController::class, 'list'])->name('expenses.list');
 
-Route::get('/', [ExpenseController::class, 'index'])->name('expenses.index');
-Route::post('/expenses', [ExpenseController::class, 'store'])->name('expenses.store');
-Route::get('/expenses', [ExpenseController::class, 'list'])->name('expenses.list');
-
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+});
 
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

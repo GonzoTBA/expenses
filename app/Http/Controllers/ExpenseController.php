@@ -22,7 +22,11 @@ class ExpenseController extends Controller
             'amount' => 'required|numeric',
         ]);
 
-        $data['date'] = now()->toDateString(); // Insertar automáticamente la fecha
+        // Enter --- if no description
+        $data['description'] = $data['description'] ?? '---';
+        $data['date'] = now()->toDateString(); // Insert date automatically
+        $user = auth()->user();
+        $data['user_id'] = $user->id; // Assign the user_id of the authenticated user
 
         Expense::create($data);
 
@@ -31,8 +35,10 @@ class ExpenseController extends Controller
 
     public function list() 
     {
-        $expenses = Expense::all();
+        $user = auth()->user();
+        $expenses = Expense::where('user_id', $user->id)->get();
+        $totalAmount = $expenses->sum('amount');
 
-        return view('expenses.list', compact('expenses'));
+        return view('expenses.list', compact('expenses', 'totalAmount'));
     }
 }
