@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Expense;
 use App\Models\User;
+use Carbon\Carbon;
 
 
 class ExpenseController extends Controller
@@ -25,7 +26,6 @@ class ExpenseController extends Controller
 
         // Enter --- if no description
         $data['description'] = $data['description'] ?? '---';
-        $data['date'] = now()->toDateString(); // Insert date automatically
         $user = auth()->user();
         $data['user_id'] = $user->id; // Assign the user_id of the authenticated user
 
@@ -37,10 +37,15 @@ class ExpenseController extends Controller
     public function list() 
     {
         $user = auth()->user();
-        $expenses = Expense::where('user_id', $user->id)->get();
+        $expenses = Expense::where('user_id', $user->id)
+            ->orderBy('created_at', 'desc')
+            ->get();
         $totalAmount = $expenses->sum('amount');
 
-        return view('expenses.list', compact('expenses', 'totalAmount'));
+        $firstExpense = $expenses->first();
+        $firstExpenseDate = Carbon::parse($firstExpense->created_at)->format('d.m.Y');
+
+        return view('expenses.list', compact('expenses', 'totalAmount', 'firstExpenseDate'));
     }
 
     public function balance()
