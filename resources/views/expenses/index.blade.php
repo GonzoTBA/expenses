@@ -20,16 +20,8 @@
                 <button type="submit" class="btn btn-primary">Add Expense</button>
             </div>
         </form>
-        @if(count($expenses) > 0)
-            <div class="text-center mt-5">
-                <a href="{{ route('expenses.list') }}" class="btn btn-primary">Show list</a>
-            </div>
-        @endif
     </div>
 </div>
-
-
-
 
 
 @if(session()->has('success') && session('success'))

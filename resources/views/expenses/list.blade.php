@@ -30,7 +30,4 @@
         </table>
     </div>
 </div>
-<div class="text-center mt-4">
-    <a href="{{ route('expenses.index') }}" class="btn btn-primary">Back to main</a>
-</div>
 @endsection
