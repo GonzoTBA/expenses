@@ -9,12 +9,12 @@
         <form action="{{ route('expenses.store') }}" method="POST">
             @csrf
             <div class="form-group">
-                <label for="description">Description:</label>
-                <input type="text" name="description" id="description" class="form-control">
+                <label for="amount">Amount<span style="color: red">*</span>:</label>
+                <input type="number" name="amount" id="amount" class="form-control" autofocus required>
             </div>
             <div class="form-group">
-                <label for="amount">Amount<span style="color: red">*</span>:</label>
-                <input type="number" name="amount" id="amount" class="form-control" required>
+                <label for="description">Description:</label>
+                <input type="text" name="description" id="description" class="form-control">
             </div>
             <div class="mt-3 d-flex justify-content-end">
                 <button type="submit" class="btn btn-primary">Add Expense</button>
