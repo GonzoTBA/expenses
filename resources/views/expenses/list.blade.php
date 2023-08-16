@@ -6,7 +6,7 @@
     <p>Since {{ $firstExpenseDate }}</p>
 
     <h1 class="mt-4">Expenses List</h1>
-    <p>Last first</p>
+    <p>Showing last first</p>
 
     <div class="table-responsive">
         <table class="table table-striped table-hover">
